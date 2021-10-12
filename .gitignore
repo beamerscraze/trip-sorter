@@ -1,0 +1,9 @@
+# IDE
+.DS_Store
+.idea
+# Composer
+/vendor/
+
+# PHPUnit
+.phpunit
+.phpunit.result.cache

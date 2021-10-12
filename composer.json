@@ -1,0 +1,37 @@
+{
+  "name": "trip/sorter",
+  "description": "Trip Sorter",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "v2.18.*",
+    "phpstan/phpstan": "v0.12.*",
+    "phpunit/phpunit": "v9.5.*",
+    "vimeo/psalm": "4.10.*"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "TripSorter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "psalm": "./vendor/bin/psalm --config=psalm.xml",
+    "phpstan": "php -d memory_limit=4G vendor/bin/phpstan analyse src --level 7",
+    "tests": "./vendor/bin/phpunit --configuration phpunit.xml --debug --verbose --debug",
+    "coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --configuration phpunit.xml --coverage-html ./coverage --debug --verbose --debug",
+    "cs-check": "./vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run",
+    "cs-fix": "./vendor/bin/php-cs-fixer fix --allow-risky=yes",
+    "pre-commit": "PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix --allow-risky=yes && ./vendor/bin/psalm --config=psalm.xml && ./vendor/bin/phpstan analyse src --level 7 && ./vendor/bin/phpunit --configuration phpunit.xml --debug --verbose"
+  }
+}

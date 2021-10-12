@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$cacheDir = __DIR__ . '/cache';
+if (!is_dir($cacheDir)) {
+    if (!mkdir(directory: $cacheDir, recursive: true) && !is_dir($cacheDir)) {
+        throw new RuntimeException(sprintf('Directory "%s" was not created', $cacheDir));
+    }
+}
+
+return (new Config())
+    ->setRiskyAllowed(true)
+    ->setRules(
+        [
+            '@PSR12' => true,
+            'braces' => [
+                'allow_single_line_closure' => true,
+            ],
+            'yoda_style'                  => false,
+            'linebreak_after_opening_tag' => true,
+            'mb_str_functions' => true,
+            'no_unreachable_default_argument_value' => true,
+            'no_useless_else' => true,
+            'no_useless_return' => true,
+            'phpdoc_order' => true,
+            'strict_comparison' => true,
+            'strict_param' => true,
+        ],
+    )
+    ->setFinder(Finder::create()->in(__DIR__))
+    ->setCacheFile("$cacheDir/.php_cs.cache");
